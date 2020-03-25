@@ -2,5 +2,5 @@
 A quick MongoDB POC in an E-commerce.
 
 ## Notes
-- You must have the MongoDB running on its default port (local/27017);
+- You must have the MongoDB running local on its default port (27017);
 - All configuration is in application.properties file.
