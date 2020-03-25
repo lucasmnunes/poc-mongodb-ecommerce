@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import poc.mongodb.ecommerce.repository.ProductRepository;
 import poc.mongodb.ecommerce.model.Product;
+import poc.mongodb.ecommerce.service.ProductService;
 
 import java.util.List;
 
@@ -12,25 +13,25 @@ import java.util.List;
 @RequestMapping("api/v1/products")
 public class ProductController {
 
-    private ProductRepository repository;
+    private ProductService service;
 
-    public ProductController(ProductRepository repository) {
-        this.repository = repository;
+    public ProductController(ProductService service) {
+        this.service = service;
     }
 
     @GetMapping
     ResponseEntity<List<Product>> findAll() {
-        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     ResponseEntity<Product> findById(@PathVariable("id") String id) {
-        return new ResponseEntity<>(repository.findById(id).get(), HttpStatus.OK);
+        return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
     ResponseEntity<Product> save(@RequestBody Product product) {
-        return new ResponseEntity<>(repository.save(product), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.save(product), HttpStatus.CREATED);
     }
 
 }
